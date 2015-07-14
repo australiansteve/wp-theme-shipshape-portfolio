@@ -2,7 +2,7 @@
 /**
  * The template for displaying all single posts.
  *
- * @package Heisenberg
+ * @package Shipshapeportfolio
  */
 
 get_header(); ?>

@@ -12,37 +12,37 @@
 	<?php endif; // End header image check. ?>
 
  *
- * @package Heisenberg
+ * @package Shipshapeportfolio
  */
 
 /**
  * Set up the WordPress core custom header feature.
  *
- * @uses heisenberg_header_style()
- * @uses heisenberg_admin_header_style()
- * @uses heisenberg_admin_header_image()
+ * @uses shipshapeportfolio_header_style()
+ * @uses shipshapeportfolio_admin_header_style()
+ * @uses shipshapeportfolio_admin_header_image()
  */
-function heisenberg_custom_header_setup() {
-	add_theme_support( 'custom-header', apply_filters( 'heisenberg_custom_header_args', array(
+function shipshapeportfolio_custom_header_setup() {
+	add_theme_support( 'custom-header', apply_filters( 'shipshapeportfolio_custom_header_args', array(
 		'default-image'          => '',
 		'default-text-color'     => '000000',
 		'width'                  => 1000,
 		'height'                 => 250,
 		'flex-height'            => true,
-		'wp-head-callback'       => 'heisenberg_header_style',
-		'admin-head-callback'    => 'heisenberg_admin_header_style',
-		'admin-preview-callback' => 'heisenberg_admin_header_image',
+		'wp-head-callback'       => 'shipshapeportfolio_header_style',
+		'admin-head-callback'    => 'shipshapeportfolio_admin_header_style',
+		'admin-preview-callback' => 'shipshapeportfolio_admin_header_image',
 	) ) );
 }
-add_action( 'after_setup_theme', 'heisenberg_custom_header_setup' );
+add_action( 'after_setup_theme', 'shipshapeportfolio_custom_header_setup' );
 
-if ( ! function_exists( 'heisenberg_header_style' ) ) :
+if ( ! function_exists( 'shipshapeportfolio_header_style' ) ) :
 /**
  * Styles the header image and text displayed on the blog
  *
- * @see heisenberg_custom_header_setup().
+ * @see shipshapeportfolio_custom_header_setup().
  */
-function heisenberg_header_style() {
+function shipshapeportfolio_header_style() {
 	$header_text_color = get_header_textcolor();
 
 	// If no custom options for text are set, let's bail
@@ -75,15 +75,15 @@ function heisenberg_header_style() {
 	</style>
 	<?php
 }
-endif; // heisenberg_header_style
+endif; // shipshapeportfolio_header_style
 
-if ( ! function_exists( 'heisenberg_admin_header_style' ) ) :
+if ( ! function_exists( 'shipshapeportfolio_admin_header_style' ) ) :
 /**
  * Styles the header image displayed on the Appearance > Header admin panel.
  *
- * @see heisenberg_custom_header_setup().
+ * @see shipshapeportfolio_custom_header_setup().
  */
-function heisenberg_admin_header_style() {
+function shipshapeportfolio_admin_header_style() {
 ?>
 	<style type="text/css">
 		.appearance_page_custom-header #headimg {
@@ -103,15 +103,15 @@ function heisenberg_admin_header_style() {
 	</style>
 <?php
 }
-endif; // heisenberg_admin_header_style
+endif; // shipshapeportfolio_admin_header_style
 
-if ( ! function_exists( 'heisenberg_admin_header_image' ) ) :
+if ( ! function_exists( 'shipshapeportfolio_admin_header_image' ) ) :
 /**
  * Custom header image markup displayed on the Appearance > Header admin panel.
  *
- * @see heisenberg_custom_header_setup().
+ * @see shipshapeportfolio_custom_header_setup().
  */
-function heisenberg_admin_header_image() {
+function shipshapeportfolio_admin_header_image() {
 	$style = sprintf( ' style="color:#%s;"', get_header_textcolor() );
 ?>
 	<div id="headimg">
@@ -123,4 +123,4 @@ function heisenberg_admin_header_image() {
 	</div>
 <?php
 }
-endif; // heisenberg_admin_header_image
+endif; // shipshapeportfolio_admin_header_image
