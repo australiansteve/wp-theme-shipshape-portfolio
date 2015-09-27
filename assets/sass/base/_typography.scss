@@ -8,9 +8,28 @@ p {
 h1 {
 	font-size: 2rem;
 	font-weight: 700;
+    padding: 1rem 0;
+	color: #044364;
 }
 
 h2 {
 	font-size: 1.25rem;
 	font-weight: 700;
+}
+
+a, p, li {
+	color: #044364
+}
+
+a:hover {
+	color: #588c96
+}
+
+/* Large screens + */
+@media only screen and (min-width: 64.063em) {
+
+	h1 {
+	    padding: 3rem 0;
+	}
+
 }

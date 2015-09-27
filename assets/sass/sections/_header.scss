@@ -1,5 +1,5 @@
 #masthead {
-	background: #ccc;
+	
 }
 
 .site-branding {
@@ -21,4 +21,15 @@
 
 .main-navigation ul {
 	margin: 0;
+}
+
+#bgImage {
+    background-position: 50% 100%;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

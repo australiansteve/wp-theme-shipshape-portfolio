@@ -70,10 +70,15 @@ function shipshapeportfolio_setup() {
 	) );
 
 	// Set up the WordPress core custom background feature.
+	/*
 	add_theme_support( 'custom-background', apply_filters( 'shipshapeportfolio_custom_background_args', array(
 		'default-color' => 'ffffff',
 		'default-image' => '',
 	) ) );
+	*/
+
+	//Set up AUSTEVE custom background functionality
+
 }
 endif; // shipshapeportfolio_setup
 add_action( 'after_setup_theme', 'shipshapeportfolio_setup' );
@@ -112,12 +117,14 @@ if ( !function_exists( 'shipshapeportfolio_styles' ) ) :
 			// Enqueue our debug stylesheet [development mode - non-minified]
 			wp_enqueue_style( 'shipshapeportfolio_styles', get_stylesheet_directory_uri() . '/assets/dist/css/app.css', '', '9' );
 			wp_enqueue_style( 'fontawesome_styles', get_stylesheet_directory_uri() . '/assets/dist/css/font-awesome.css', '', '9' );
+			wp_enqueue_style( 'home_styles', get_stylesheet_directory_uri() . '/style.css', '', '9' );
 
 		else :
 
 			// Enqueue our minified stylesheet [production mode - minified stylesheet]
 			wp_enqueue_style( 'shipshapeportfolio_styles', get_stylesheet_directory_uri() . '/assets/dist/css/app.min.css', '', '9' );
 			wp_enqueue_style( 'fontawesome_styles', get_stylesheet_directory_uri() . '/assets/dist/css/font-awesome.min.css', '', '9' );
+			wp_enqueue_style( 'home_styles', get_stylesheet_directory_uri() . '/style.css', '', '9' );
 
 		endif;
 

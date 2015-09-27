@@ -121,8 +121,7 @@ gulp.task('deploylocal', function() {
 		'languages/**.*',
 		'page-templates/**/*',
 		'screenshot.png',
-		'*.php',
-		'*.css'];
+		'*.php'];
 
 	var dest = '/var/www/html/theme-dev/wp-content/themes/shipshapeportfolio';
 

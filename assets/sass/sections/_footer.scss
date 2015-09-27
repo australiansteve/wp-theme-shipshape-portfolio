@@ -1,4 +1,16 @@
 #colophon {
-	background: #ccc;
 	padding: 1rem 0;
+	height: 100px
+
+}
+
+p.footer {
+    padding-top: 50px;
+    font-size: 0.7em;
+    text-align: right;
+    color: rgba(215, 215, 215, 1);
+
+    a {
+    	color: rgba(215, 215, 215, 1);
+    }
 }

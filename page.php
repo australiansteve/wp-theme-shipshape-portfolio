@@ -12,37 +12,30 @@
 
 get_header(); ?>
 
-<div class="row"><!-- .row start -->
+<div class="small-12 columns"><!-- .columns start -->
 
-	<div class="medium-8 small-12 columns"><!-- .columns start -->
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
 
-		<div id="primary" class="content-area">
-			<main id="main" class="site-main" role="main">
+		<div class="row">
 
-				<?php while ( have_posts() ) : the_post(); ?>
+			<div class="small-12 columns">
+				Site title
+			</div>
 
-					<?php get_template_part( 'page-templates/partials/content', 'page' ); ?>
+			<div class="small-12 medium-8 columns">
+				Info
+			</div>
+			
+			<div class="small-12 medium-4 columns">
+				Download
+			</div>
+			
+		</div>
 
-					<?php
-						// If comments are open or we have at least one comment, load up the comment template
-						if ( comments_open() || get_comments_number() ) :
-							comments_template();
-						endif;
-					?>
+		</main><!-- #main -->
+	</div><!-- #primary -->
 
-				<?php endwhile; // end of the loop. ?>
-
-			</main><!-- #main -->
-		</div><!-- #primary -->
-
-	</div><!-- .columns end -->
-
-	<div class="medium-4 small-12 columns"><!-- .columns start -->
-
-		<?php get_sidebar(); ?>
-
-	</div><!-- .columns end -->
-
-</div><!-- .row end -->
+</div><!-- .columns end -->
 
 <?php get_footer(); ?>
