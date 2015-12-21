@@ -137,21 +137,13 @@ add_action( 'wp_enqueue_scripts', 'shipshapeportfolio_styles' );
 endif;
 
 
-
-
 /**
  * Enqueue scripts.
  */
 function shipshapeportfolio_scripts() {
 
-	// Add modernizer.js for shimming HTML5 elements that older browsers may not detect and for mobile detection
-	wp_enqueue_script ( 'modernizr', get_template_directory_uri() . '/assets/components/modernizr/modernizr.js', '', '', false );
-
-	// Add fastclick.js file to footer (for help with devices with touch UIs)
-	wp_enqueue_script ( 'fastclick_js', get_template_directory_uri() . '/assets/components/fastclick/lib/fastclick.js', '', '', true );
-
 	// Add core Foundation js to footer
-	wp_enqueue_script( 'foundation-js', get_template_directory_uri() . '/assets/components/foundation/js/foundation.min.js', array( 'jquery' ), '5', true );
+	wp_enqueue_script( 'foundation-js', get_template_directory_uri() . '/node_modules/foundation-sites/dist/foundation.js', array( 'jquery' ), '6.0.3', true );
 
 	// Add our concatenated js file
 	if ( WP_DEBUG ) {
@@ -165,20 +157,12 @@ function shipshapeportfolio_scripts() {
 		wp_enqueue_script( 'shipshapeportfolio_appjs', get_template_directory_uri() . '/assets/dist/js/app.min.js', array( 'jquery' ), '', true );
 	}
 
-	wp_enqueue_script( 'shipshapeportfolio-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
-
-	wp_enqueue_script( 'shipshapeportfolio-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
-
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'shipshapeportfolio_scripts' );
 
-/**
- * Implement the Custom Header feature.
- */
-//require get_template_directory() . '/inc/custom-header.php';
 
 /**
  * Custom template tags for this theme.
@@ -200,21 +184,24 @@ require get_template_directory() . '/inc/customizer.php';
  */
 require get_template_directory() . '/inc/jetpack.php';
 
-add_filter('wp_head','foundation_header');
 
-function foundation_header(){
-	?>
-	<script type="text/javascript">
-		jQuery(document).ready(function($) {
-			$(document).foundation();
-		});
-	</script>
-	<?php
-}
 
 add_filter( 'wp_nav_menu', 'shipshapeportfolio_nav_menu', 10, 2 );
 
 function shipshapeportfolio_nav_menu( $menu ){
 	$menu = str_replace('current-menu-item', 'current-menu-item active', $menu);
 	return $menu;
+}
+
+
+/**
+ * Make oembed elements responsive. Add Foundation's .flex-video class wrapper
+ * around any oembeds
+ */
+
+add_filter( 'embed_oembed_html', 'shipshapeportfolio_oembed_flex_wrapper', 10, 4 ) ;
+
+function shipshapeportfolio_oembed_flex_wrapper( $html, $url, $attr, $post_ID ) {
+	$return = '<div class="flex-video">'.$html.'</div>';
+	return $return;
 }

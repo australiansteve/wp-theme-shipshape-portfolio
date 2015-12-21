@@ -19,6 +19,6 @@
 
 <body <?php body_class(); ?>>
 
-<div id="bgImage"/>
+<div id="bgImage"></div>
 
 <div id="page" class="hfeed site">

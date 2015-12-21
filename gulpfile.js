@@ -1,11 +1,11 @@
 // Load our plugins
-var	gulp				=	require('gulp'),
-	sass					=	require('gulp-sass'),  // Our sass compiler
-	notify				=	require('gulp-notify'), // Basic gulp notificatin using OS
-	minifycss			=	require('gulp-minify-css'), // Minification
-	rename				=	require('gulp-rename'), // Allows us to rename our css file prior to minifying
-	autoprefixer	=	require('gulp-autoprefixer'), // Adds vendor prefixes for us
-	browserSync		=	require('browser-sync'), // Sends php, js, img and css updates to browser for us
+var	gulp			= require('gulp'),
+	sass			= require('gulp-sass'),  // Our sass compiler
+	notify			= require('gulp-notify'), // Basic gulp notificatin using OS
+	sourcemaps		= require('gulp-sourcemaps'), // Sass sourcemaps
+	rename			= require('gulp-rename'), // Allows us to rename our css file prior to minifying
+	autoprefixer		= require('gulp-autoprefixer'), // Adds vendor prefixes for us
+	browserSync		= require('browser-sync'), // Sends php, js, img and css updates to browser for us
 	concat			= require('gulp-concat'), // Concat our js
 	uglify			= require('gulp-uglify'), // Minify our js
 	jshint 			= require('gulp-jshint'); // Checks for js errors
@@ -26,26 +26,21 @@ gulp.task('browser-sync', function() {
 // Our 'styles' tasks, which handles our sass actions such as compliling and minification
 
 gulp.task('styles', function() {
-		gulp.src('./assets/sass/**/*.scss')
+	gulp.src('assets/sass/**/*.scss')
+		.pipe(sourcemaps.init())
 		.pipe(sass({
-			style: 'expanded',
-			sourceComments: true
+			// outputStyle: 'compressed'
 		})
 		.on('error', notify.onError(function(error) {
 			return "Error: " + error.message;
 		}))
 		)
 		.pipe(autoprefixer({
-			browsers: ['last 2 versions', 'ie >= 8']
+			browsers: ['last 2 versions', 'ie >= 9']
 		})) // our autoprefixer - add and remove vendor prefixes using caniuse.com
+		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest('./assets/dist/css')) // Location of our app.css file
-		.pipe(browserSync.reload({stream:true})) // CSS injection when app.css file is written
-		.pipe(rename({suffix: '.min'})) // Create a copy version of our compiled app.css file and name it app.min.css
-		.pipe(minifycss({
-			keepSpecialComments:0
-		})) // Minify our newly copied app.min.css file
-		.pipe(gulp.dest('./assets/dist/css')) // Save app.min.css onto this directory
-		.pipe(browserSync.reload({stream:true})) // CSS injection when app.min.css file is written
+		.pipe(browserSync.stream({match: '**/*.css'}))
 		.pipe(notify({
 			message: "Styles task complete!"
 		}));
@@ -54,11 +49,15 @@ gulp.task('styles', function() {
 
 // Our 'scripts' task, which handles our javascript elements
 gulp.task('js', function() {
-	return gulp.src('./assets/js/**/*.js')
+	return gulp.src('assets/js/**/*.js')
 		.pipe(concat('app.js'))
 		.pipe(gulp.dest('./assets/dist/js'))
 		.pipe(rename({suffix: '.min'}))
-		.pipe(uglify())
+		.pipe(uglify()
+		.on('error', notify.onError(function(error) {
+			return "Error: " + error.message;
+		}))
+		)
 		.pipe(gulp.dest('./assets/dist/js'))
 		.pipe(browserSync.reload({stream:true}))
 		.pipe(notify({ message: "Scripts task complete!"}));
@@ -131,9 +130,9 @@ gulp.task('deploylocal', function() {
 
 // Watch our files and fire off a task when something changes
 gulp.task('watch', function() {
-	gulp.watch('./assets/sass/**/*.scss', ['styles']);
-	gulp.watch('./assets/js/**/*.js', ['jsHint']);
-	gulp.watch('./assets/js/**/*.js', ['js']);
+	gulp.watch('assets/sass/**/*.scss', ['styles']);
+	gulp.watch('assets/js/**/*.js', ['jsHint']);
+	gulp.watch('assets/js/**/*.js', ['js']);
 });
 
 
