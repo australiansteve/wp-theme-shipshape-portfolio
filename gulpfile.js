@@ -113,13 +113,14 @@ gulp.task('deploylocal', function() {
 	var files = [
 		'assets/components/modernizr/modernizr.js',
 		'assets/components/fastclick/lib/fastclick.js',
-		'assets/components/foundation/js/foundation.min.js',
 		'assets/dist/**/*', 
-		'inc/**.*',
+		'node_modules/foundation-sites/dist/**/*', 
+		'inc/**/**.*',
 		'js/**/*.js',
 		'languages/**.*',
 		'page-templates/**/*',
 		'screenshot.png',
+		'*.css',
 		'*.php'];
 
 	var dest = '/var/www/html/theme-dev/wp-content/themes/shipshapeportfolio';

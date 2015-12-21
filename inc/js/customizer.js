@@ -33,4 +33,18 @@
 			}
 		} );
 	} );
+
+	// BackgroundImage
+	wp.customize( 'backgroundimage', function( value ) {
+
+		value.bind( function( to ) {
+		console.log("Background Image to: " + to);
+			if ( '' === to ) {
+				$( '#bgImage' ).css( "background-image", "none");
+			} else {
+				$( '#bgImage' ).css( "background-image", "url(" + to + ")" );
+			}
+		} );
+	} );
+
 } )( jQuery );
